@@ -4,8 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomFormTextField extends StatefulWidget {
+  /// default value for [TextFormField]
+
+  /// [title] on TextFormField
   final String? title;
+  
+  /// [hintText] in TextFormField when have not value
   final String? hintText;
+
+  /// [textEditingController] controller in TextFormField
   final TextEditingController? textEditingController;
   final VoidCallback? onPressedIcon;
   final VoidCallback? onTapTextField;
@@ -14,10 +21,24 @@ class CustomFormTextField extends StatefulWidget {
   final bool? isChildTitle;
   final String? childTitle;
   final bool? isPassword;
+
+  /// [isTitle] display or not display title on TextFormField
+  /// Let's set true or false
   final bool? isTitle;
+
+  /// [isShowIcon] display or not display icon in TextFormField on the right
+  /// Let's set true or false
   final bool? isShowIcon;
+
+  /// [isShowIconPre] display or not display icon in TextFormField on the left
+  /// Let's set true or false
   final bool? isShowIconPre;
+
+  /// [keyboardType] choose keyboardType : number,...
+  ///  TextInputType
   final TextInputType? keyboardType;
+  
+  /// [onChanged] value change...
   final ValueChanged<String>? onChanged;
   final FormFieldValidator<String>? validator;
   final Color? colorBorder;
@@ -105,7 +126,7 @@ class StateFormFiled extends State<CustomFormTextField> {
                       overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         text: widget.title,
-                        style: TextStyle(color: Colors.black87),
+                        style: const TextStyle(color: Colors.black87),
                         children: <TextSpan>[
                           TextSpan(
                             text: widget.obligatory! ? ' *' : '',

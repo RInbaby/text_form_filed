@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:text_form_filed/text_form_filed.dart';
 
+import 'home_widget.dart';
+
 class LogIn extends StatefulWidget {
   @override
   LogInState createState() => LogInState();
@@ -66,7 +68,9 @@ class LogInState extends State<LogIn> {
                   Container(
                     width: width,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MyDaysWidget()));
+                        },
                         style: ElevatedButton.styleFrom(
                             primary: Colors.redAccent[100],
                             shape: RoundedRectangleBorder(

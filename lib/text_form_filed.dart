@@ -116,6 +116,21 @@ class CustomFormTextField extends StatefulWidget {
 }
 
 class StateFormFiled extends State<CustomFormTextField> {
+  late final FocusNode focusNode;
+
+  @override
+  void initState() {
+    focusNode = FocusNode();
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -148,81 +163,80 @@ class StateFormFiled extends State<CustomFormTextField> {
                 height: 6,
               )
             : Container(),
-        Form(
-          key: widget.keyText,
-          child: TextFormField(
-              autocorrect: false,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              onEditingComplete: () {
-                widget.onEditingComplete == null
-                    ? FocusScope.of(context).nextFocus()
-                    : widget.onEditingComplete;
-              },
-              validator: widget.validator,
-              inputFormatters: widget.inputFormatters,
-              maxLength: widget.maxLength,
-              onTap: widget.onTapTextField,
-              readOnly: widget.readOnly!,
-              focusNode: widget.focus,
-              maxLines: widget.maxLine,
-              minLines: widget.minLine,
-              obscureText: widget.isPassword!,
-              onChanged: widget.onChanged,
-              scrollPadding: EdgeInsets.all(5),
-              keyboardType: widget.keyboardType,
-              controller: widget.textEditingController,
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 17, color: widget.colorTitle),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: widget.fillColor,
-                errorText: widget.error,
-                hintText: widget.hintText,
-                labelStyle:
-                    const TextStyle(color: Colors.black87, fontSize: 16),
-                hintStyle: const TextStyle(color: Colors.indigo, fontSize: 14),
-                focusedBorder: widget.xStyleBorder,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: BorderSide(
-                    width: 0.5,
-                    color: widget.colorBorder!,
+        RawKeyboardListener(
+          focusNode: focusNode,
+          child: Form(
+            key: widget.keyText,
+            child: TextFormField(
+                autocorrect: false,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                onEditingComplete: () {
+                  widget.onEditingComplete == null ? FocusScope.of(context).nextFocus() : widget.onEditingComplete;
+                },
+                validator: widget.validator,
+                inputFormatters: widget.inputFormatters,
+                maxLength: widget.maxLength,
+                onTap: widget.onTapTextField,
+                readOnly: widget.readOnly!,
+                focusNode: widget.focus,
+                maxLines: widget.maxLine,
+                minLines: widget.minLine,
+                obscureText: widget.isPassword!,
+                onChanged: widget.onChanged,
+                scrollPadding: EdgeInsets.all(5),
+                keyboardType: widget.keyboardType,
+                controller: widget.textEditingController,
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 17, color: widget.colorTitle),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: widget.fillColor,
+                  errorText: widget.error,
+                  hintText: widget.hintText,
+                  labelStyle: const TextStyle(color: Colors.black87, fontSize: 16),
+                  hintStyle: const TextStyle(color: Colors.indigo, fontSize: 14),
+                  focusedBorder: widget.xStyleBorder,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(
+                      width: 0.5,
+                      color: widget.colorBorder!,
+                    ),
                   ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: BorderSide(
-                    width: 0.5,
-                    color: widget.colorBorder!,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(
+                      width: 0.5,
+                      color: widget.colorBorder!,
+                    ),
                   ),
-                ),
-                floatingLabelBehavior: FloatingLabelBehavior.auto,
-                prefixIconConstraints: const BoxConstraints(),
-                prefixIcon: widget.isShowIconPre!
-                    ? Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Icon(
-                          widget.iconPrefix!,
-                          color: widget.colorIcon,
-                        ))
-                    : null,
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                suffixIconConstraints: const BoxConstraints(),
-                suffixIcon: widget.isShowIcon!
-                    ? InkWell(
-                        onTap: widget.onPressedIcon,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Icon(
-                            widget.iconSuffix!,
-                            color: widget.colorIcon,
-                          ),
-                        ),
-                      )
-                    : null,
-              )),
-        ),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  prefixIconConstraints: const BoxConstraints(),
+                  prefixIcon: widget.isShowIconPre!
+                      ? Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Icon(
+                        widget.iconPrefix!,
+                        color: widget.colorIcon,
+                      ))
+                      : null,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                  suffixIconConstraints: const BoxConstraints(),
+                  suffixIcon: widget.isShowIcon!
+                      ? InkWell(
+                    onTap: widget.onPressedIcon,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Icon(
+                        widget.iconSuffix!,
+                        color: widget.colorIcon,
+                      ),
+                    ),
+                  )
+                      : null,
+                )),
+          ),
+        )
       ],
     );
   }

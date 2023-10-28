@@ -8,7 +8,7 @@ class CustomFormTextField extends StatefulWidget {
 
   /// [title] on TextFormField
   final String? title;
-  
+
   /// [hintText] in TextFormField when have not value
   final String? hintText;
 
@@ -37,7 +37,7 @@ class CustomFormTextField extends StatefulWidget {
   /// [keyboardType] choose keyboardType : number,...
   ///  TextInputType
   final TextInputType? keyboardType;
-  
+
   /// [onChanged] value change...
   final ValueChanged<String>? onChanged;
   final FormFieldValidator<String>? validator;
@@ -64,6 +64,8 @@ class CustomFormTextField extends StatefulWidget {
   final double? sizeHintText;
   final FocusNode? focus;
   final List<TextInputFormatter>? inputFormatters;
+  final Color? titleColor;
+  final InputBorder? xStyleBorder;
 
   const CustomFormTextField({
     Key? key,
@@ -105,6 +107,8 @@ class CustomFormTextField extends StatefulWidget {
     this.onTapIconTitle,
     this.sizeHintText = 14,
     this.onEditingComplete,
+    this.titleColor = Colors.black87,
+    this.xStyleBorder,
   });
 
   @override
@@ -127,7 +131,7 @@ class StateFormFiled extends State<CustomFormTextField> {
                       overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         text: widget.title,
-                        style: const TextStyle(color: Colors.black87),
+                        style: TextStyle(color: widget.titleColor),
                         children: <TextSpan>[
                           TextSpan(
                             text: widget.obligatory! ? ' *' : '',
@@ -167,10 +171,7 @@ class StateFormFiled extends State<CustomFormTextField> {
               scrollPadding: EdgeInsets.all(5),
               keyboardType: widget.keyboardType,
               controller: widget.textEditingController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 17,
-                  color: widget.colorTitle),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 17, color: widget.colorTitle),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: widget.fillColor,
@@ -179,13 +180,7 @@ class StateFormFiled extends State<CustomFormTextField> {
                 labelStyle:
                     const TextStyle(color: Colors.black87, fontSize: 16),
                 hintStyle: const TextStyle(color: Colors.indigo, fontSize: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: BorderSide(
-                    width: 0.5,
-                    color: widget.colorBorder!,
-                  ),
-                ),
+                focusedBorder: widget.xStyleBorder,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                   borderSide: BorderSide(
@@ -230,5 +225,9 @@ class StateFormFiled extends State<CustomFormTextField> {
         ),
       ],
     );
+  }
+
+  List<TextInputFormatter>? textInputFormaterList() {
+
   }
 }
